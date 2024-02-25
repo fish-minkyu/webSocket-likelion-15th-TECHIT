@@ -13,18 +13,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-// 메시지가 도착했을 때, 어떻게 행동할지 정의하는 추상 클래스
-// TextWebSocketHandler: 문자로 들어오는 메시지를 처리하기 위한 Web Socket 구현체
 @Slf4j
 @Component
-public class SimpleChatHandler extends TextWebSocketHandler {
+// 메시지가 도착했을 때, 어떻게 행동할지 정의하는 추상 클래스
+public class SimpleChatHandler extends TextWebSocketHandler { // TextWebSocketHandler: 문자로 들어오는 메시지를 처리하기 위한 Web Socket 구현체
   // 현재 접속한 사용자 목록
   private final List<WebSocketSession> sessions = new ArrayList<>();
   // JSON Serialize 라이브러리
   private final Gson gson = new Gson();
-
-  // WebSocketSession session: 실제로 연결을 한 클라이언트를 나타내는 객체
-
 
   @Override
   // 연결이 될 때, 무슨 동작을 할지 정의

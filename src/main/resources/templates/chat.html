@@ -19,7 +19,11 @@
 <script>
     const username = (new URLSearchParams(location.search)).get('username')
     document.getElementById('username-holder').innerText = username
+
+    // WebSocket 생성
     const webSocket = new WebSocket('ws://localhost:8080/ws/chat')
+
+    // 접속 연결이 되었을 때, 실행
     webSocket.onopen = (event) => {
         console.log(event)
         webSocket.send(JSON.stringify({
@@ -27,6 +31,8 @@
             message: `${username} 입장`
         }))
     }
+
+    // 메시지를 보낼 때, 실행
     webSocket.onmessage = (msg) => {
         console.log(msg)
         const data = JSON.parse(msg.data)
@@ -37,6 +43,8 @@
         chatMessage.appendChild(message)
         document.getElementById('response').appendChild(chatMessage)
     }
+
+    // 접속이 종료되었을 때, 실행
     webSocket.onclose = (event) => {
         console.log(event)
         webSocket.send(JSON.stringify({
